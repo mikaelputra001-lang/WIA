@@ -8,11 +8,11 @@ stage: First Draft Submission
 
 ## Hasil
 
-- Website lokal berada pada `website/`: Beranda, Buat Laporan, Cek Status, Transparansi, dan Panduan & Privasi.
+- Website lokal berada langsung di root repository: Beranda, Buat Laporan, Cek Status, Transparansi, dan Panduan & Privasi.
 - README berada pada [[README]] di root vault, agar seluruh Markdown tetap tersimpan di Obsidian.
-- PDF: `submission/WIA_FSDMIA2026_LarpHackathonPertama.pdf`, 8 halaman, 272.731 byte.
-- PowerPoint editable: `submission/WIA_FSDMIA2026_LarpHackathonPertama.pptx`, 8 slide, 244.134 byte.
-- Screenshot asli halaman yang berjalan berada pada `evidence/`. Cuplikan desain awal diberi label berbeda dari screenshot implementasi.
+- PDF: `WIA_FSDMIA2026_LarpHackathonPertama.pdf` di root repository, 8 halaman, kurang dari 10 MB.
+- PowerPoint editable: `WIA_FSDMIA2026_LarpHackathonPertama.pptx` di root repository, 8 slide.
+- Screenshot asli halaman yang berjalan juga berada di root repository (`01-landing-desktop.png`, `02-lapor-desktop.png`, dan seterusnya). Cuplikan desain awal diberi label berbeda dari screenshot implementasi.
 - Repository tujuan: https://github.com/sagara-ds/WIA, terverifikasi publik melalui API GitHub.
 
 ## Yang sudah diuji
@@ -23,7 +23,7 @@ stage: First Draft Submission
 - Lima halaman dibuka tanpa error JavaScript. Tidak ada POST formulir selama pengujian.
 - Tidak ditemukan overflow horizontal pada viewport 375, 768, dan 1440 px. Menu mobile berhasil dibuka.
 - PDF diperiksa jumlah halaman, ukuran, konten wajib, kecukupan ruang teks, dan visual seluruh halaman setelah render Poppler.
-- PowerPoint diperiksa struktur ZIP, geometri, font Arial, jumlah slide, impor melalui Artifact Tool, dan preview seluruh slide. Receipt validator disimpan pada `.build/pptx-validation.json` dan tidak diunggah.
+- PowerPoint diperiksa struktur ZIP, geometri, font Arial, jumlah slide, impor melalui Artifact Tool, dan preview seluruh slide. Receipt validator disimpan pada `.build/pptx-validation*.json` dan tidak diunggah.
 
 ## Batasan
 
@@ -32,5 +32,7 @@ Ini first draft yang memakai data contoh. Penyimpanan hanya sessionStorage pada 
 Admin, audit log permanen, pesan dua arah, pembersihan metadata, database, CAPTCHA, pembatasan percobaan server, dan integrasi instansi belum diimplementasikan. Studi kasus dan mitra pelaksana masih perlu diputuskan.
 
 ## Langkah tim
+
+Struktur telah diratakan sesuai koreksi pemilik proyek: [[Struktur Proyek]]. Vault hanya memuat catatan; semua kode dan hasil berada di root repository. Jalankan `npm install`, `npm run dev`, dan `npm test` dari root repository.
 
 Periksa isi PDF dan nama tim, lalu kumpulkan tautan repo publik serta PDF melalui portal resmi MIA 2026. Jam penutupan tidak diketahui dari gambar pengumuman. Belum ada pengumpulan atau bukti penerimaan dari panitia.

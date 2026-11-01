@@ -17,7 +17,7 @@ SIAP adalah prototype website pelaporan dugaan penyimpangan yang membantu warga 
 
 ```bash
 git clone https://github.com/sagara-ds/WIA.git
-cd WIA/WIA/SIAP/website
+cd WIA
 npm install
 npm run dev
 ```
@@ -65,24 +65,28 @@ Tahap berikutnya: menentukan studi kasus dan mitra pelaksana, membangun backend 
 ## Struktur proyek dan materi submission
 
 ```text
-WIA/
-├── README.md                 # README ini, disimpan dalam vault Obsidian
-├── SIAP/
-│   ├── website/              # Sumber website yang dapat dijalankan
-│   ├── submission/           # PDF dan PowerPoint first draft
-│   └── evidence/             # Screenshot dari website yang berjalan
-└── SIAP Design/              # Catatan, sumber desain, dan node Figma
+WIA/                          # Root repository
+├── index.html, lapor.html, cek.html, transparansi.html, panduan.html
+├── styles.css, app.js, model.js, server.js, model.test.js
+├── package.json, package-lock.json
+├── preview.html, screens.json, figma-*.js, figma-nodes.json
+├── build-deck.mjs, build-pdf.py, build.ps1, verify-*.cjs
+├── *.png, *.pdf, *.pptx       # Screenshot dan hasil submission
+└── WIA/                      # Vault Obsidian: catatan Markdown saja
+    ├── README.md
+    ├── Design brief.md
+    └── Status First Draft.md
 ```
 
-README ditempatkan dalam direktori `WIA/` karena seluruh Markdown proyek disimpan pada vault Obsidian sesuai instruksi pemilik proyek.
+Vault `WIA/` hanya digunakan untuk second brain. Kode, sumber desain, hasil submission, dan screenshot berada langsung di root repository; tidak ada folder `SIAP`, `SIAP Design`, atau `website`. Direktori tersembunyi `.build/` hanya berisi hasil pemeriksaan sementara dan diabaikan Git.
 
 ## Materi First Draft Submission
 
-- [PDF pengumpulan — 8 halaman](SIAP/submission/WIA_FSDMIA2026_LarpHackathonPertama.pdf)
-- [PowerPoint yang dapat diedit](SIAP/submission/WIA_FSDMIA2026_LarpHackathonPertama.pptx)
-- [Screenshot landing page yang berjalan](SIAP/evidence/01-landing-desktop.png)
-- [Screenshot halaman Buat Laporan yang berjalan](SIAP/evidence/02-lapor-desktop.png)
-- [Sumber website](SIAP/website)
+- [PDF pengumpulan — 8 halaman](../WIA_FSDMIA2026_LarpHackathonPertama.pdf)
+- [PowerPoint yang dapat diedit](../WIA_FSDMIA2026_LarpHackathonPertama.pptx)
+- [Screenshot landing page yang berjalan](../01-landing-desktop.png)
+- [Screenshot halaman Buat Laporan yang berjalan](../02-lapor-desktop.png)
+- [Halaman utama website](../index.html)
 
 PDF memuat konsep, sitemap, wireframe/mock-up, fitur, screenshot implementasi, stack, dan progres. Nama dan batas berkas mengikuti pengumuman first draft. Berkas masih perlu dikumpulkan oleh tim melalui website resmi MIA 2026.
 

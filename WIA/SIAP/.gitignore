@@ -1,4 +1,0 @@
-.build/
-.qa/
-node_modules/
-*.log

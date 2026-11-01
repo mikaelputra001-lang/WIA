@@ -7,6 +7,10 @@ tags: [siap, desain, prototype]
 
 # SIAP — Rancangan antarmuka
 
+Struktur terkini: [[Struktur Proyek]]. Dokumen ini adalah catatan second brain; seluruh berkas kode/desain yang disebut di bawah berada di root repository, satu tingkat di atas vault, tanpa folder `SIAP` atau `SIAP Design`.
+
+Acuan pengumpulan lomba: [[Ketentuan First Draft Submission MIA 2026]]. Pengumuman meminta repository publik dengan README serta PDF maksimal 10 halaman/10 MB, termasuk screenshot landing page dan minimal satu halaman lain yang sudah dikerjakan. Hasil desain perlu disertai progres implementasi yang dijelaskan secara akurat.
+
 ## Sumber dan batas pekerjaan
 
 Sumber: PRD SIAP v1.0, 30 Oktober 2026, dokumen pengguna. Target: https://www.figma.com/design/I6y3NdiGXwkWVwcahYevbo/SIAP

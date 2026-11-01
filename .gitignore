@@ -1,4 +1,6 @@
+.build/
+.qa/
 node_modules/
+*.log
 .env
 .env.*
-*.log

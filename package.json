@@ -5,5 +5,5 @@
   "type": "module",
   "description": "Demo first draft SIAP — Sistem Informasi Aduan Publik",
   "engines": { "node": ">=18" },
-  "scripts": { "start": "node server.js", "dev": "node server.js", "test": "node --test tests/model.test.js" }
+  "scripts": { "start": "node server.js", "dev": "node server.js", "test": "node --test model.test.js" }
 }
