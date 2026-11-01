@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-01",
+  "unit": "See npm test",
+  "screenshots": 5,
+  "browserErrors": [],
+  "horizontalOverflow": [],
+  "formPostRequests": [],
+  "passed": [
+    "report validation",
+    "file validation",
+    "consent",
+    "ticket creation",
+    "PIN hash storage",
+    "invalid credentials",
+    "valid ticket access",
+    "clear session",
+    "mobile navigation",
+    "responsive 375/768/1440"
+  ]
+}

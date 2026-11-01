@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {validateReport,validateFiles,isExpired,sanitizeForStorage,MAX_SIZE} from '../model.js';
+const valid={kategori:'Dugaan pungutan liar',judul:'Contoh dugaan biaya tambahan',kronologi:'Ini kronologi fiktif yang cukup panjang untuk menguji validasi laporan.',tanggal:'2026-10-28',lokasi:'Loket contoh',pihak:'Petugas contoh'};
+test('Laporan valid diterima, tanggal mendatang dan tanggal mustahil ditolak',()=>{assert.deepEqual(validateReport(valid,'2026-11-01'),{});assert.ok(validateReport({...valid,tanggal:'2026-11-02'},'2026-11-01').tanggal);assert.ok(validateReport({...valid,tanggal:'2026-02-30'},'2026-11-01').tanggal);});
+test('Kategori tidak dikenal dan kronologi pendek tidak dapat diteruskan',()=>{const e=validateReport({...valid,kategori:'Tidak dikenal',kronologi:'pendek'});assert.ok(e.kategori);assert.ok(e.kronologi);});
+test('Bukti wajib, MIME harus sesuai, jumlah dan ukuran dibatasi',()=>{const f={name:'contoh.pdf',type:'application/pdf',size:100};assert.equal(validateFiles([f]),'');assert.ok(validateFiles([]));assert.ok(validateFiles(Array(6).fill(f)));assert.ok(validateFiles([{...f,type:'text/html'}]));assert.ok(validateFiles([{...f,size:MAX_SIZE+1}]));assert.ok(validateFiles([{...f,size:0}]));});
+test('Sesi habis tepat pada batas waktu dan input tambahan tidak ikut tersimpan',()=>{assert.equal(isExpired({expires:1000},999),false);assert.equal(isExpired({expires:1000},1000),true);assert.equal(isExpired(null),true);assert.equal('email' in sanitizeForStorage({...valid,email:'contoh@invalid'}),false);});
