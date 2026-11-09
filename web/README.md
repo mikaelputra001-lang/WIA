@@ -69,14 +69,14 @@ Tujuan prototipe: mendemonstrasikan alur pelaporan anonim ujung-ke-ujung (pelapo
 
 ## Tech Stack
 
-| Lapisan | Teknologi |
-| --- | --- |
-| UI | React 19 + TypeScript |
-| Build | Vite 8 |
-| Routing | React Router 8 |
-| Styling | Tailwind CSS 4 + CSS design token kustom |
-| Lint | Oxlint |
-| Font | Inter Variable (`@fontsource-variable/inter`) |
+| Lapisan                 | Teknologi                                        |
+| ----------------------- | ------------------------------------------------ |
+| UI                      | React 19 + TypeScript                            |
+| Build                   | Vite 8                                           |
+| Routing                 | React Router 8                                   |
+| Styling                 | Tailwind CSS 4 + CSS design token kustom         |
+| Lint                    | Oxlint                                           |
+| Font                    | Inter Variable (`@fontsource-variable/inter`)    |
 | Penyimpanan (prototipe) | `sessionStorage` browser — **belum ada backend** |
 
 ---
@@ -109,25 +109,25 @@ npm run preview    # menyajikan hasil build
 
 ### Akun petugas
 
-| Email | Kata sandi | Peran |
-| --- | --- | --- |
+| Email                        | Kata sandi    | Peran       |
+| ---------------------------- | ------------- | ----------- |
 | `verifikator@contoh.invalid` | `verif-admin` | verifikator |
-| `pengelola@contoh.invalid` | `super-admin` | super_admin |
+| `pengelola@contoh.invalid`   | `super-admin` | super_admin |
 
 Akses panel petugas melalui tautan **“Akses petugas →”** di footer atau langsung ke `/petugas`.
 
 ### Tiket contoh
 
-| Kode tiket | PIN | Status |
-| --- | --- | --- |
+| Kode tiket        | PIN      | Status           |
+| ----------------- | -------- | ---------------- |
 | `SIAP-DEMO-7K4M9` | `482619` | Perlu Dilengkapi |
-| `SIAP-DEMO-2Q6R8` | `730215` | Selesai |
-| `SIAP-FL-K8N3R` | `901234` | Diterima |
-| `SIAP-FL-P4W7Q` | `567890` | Diterima |
-| `SIAP-FL-M9V2T` | `345678` | Perlu Dilengkapi |
-| `SIAP-FL-B6D8L` | `234567` | Ditolak |
-| `SIAP-FL-R3H5Y` | `123456` | Diteruskan |
-| `SIAP-FL-T7J2N` | `890123` | Ditindaklanjuti |
+| `SIAP-DEMO-2Q6R8` | `730215` | Selesai          |
+| `SIAP-FL-K8N3R`   | `901234` | Diterima         |
+| `SIAP-FL-P4W7Q`   | `567890` | Diterima         |
+| `SIAP-FL-M9V2T`   | `345678` | Perlu Dilengkapi |
+| `SIAP-FL-B6D8L`   | `234567` | Ditolak          |
+| `SIAP-FL-R3H5Y`   | `123456` | Diteruskan       |
+| `SIAP-FL-T7J2N`   | `890123` | Ditindaklanjuti  |
 
 Semua tiket, nama unit, dan percakapan adalah **data contoh** untuk simulasi.
 
@@ -218,23 +218,23 @@ Catatan: balasan pelapor **tidak otomatis** mengubah status. Tiket tetap `Perlu 
 
 ## Keterlacakan PRD
 
-| Kebutuhan | Layar |
-| --- | --- |
-| F-01–F-06 | `lapor`, `bukti`, `tinjau`, `terkirim` |
-| F-09–F-12 | `cek`, `tiket`, `balas`, `balas-terkirim` |
-| F-13–F-17 | `petugas` (login), `antrean`, `detail`, `verifikasi`, `lengkapi`, `tolak`, `teruskan`, `tindakan`, `selesai` |
-| F-18 | `petugas/audit` |
-| F-19 | `petugas/master` (ringkasan; CRUD belum dirinci) |
-| F-20–F-23 | `transparansi` |
-| F-07–F-08 | Ditunda: identitas terverifikasi dan peta |
+| Kebutuhan | Layar                                                  |
+| --------- | ------------------------------------------------------ |
+| F-01–F-06 | `lapor`, `bukti`, `tinjau`, `terkirim`                 |
+| F-09–F-12 | `cek`, `tiket`, `balas`, `balas-terkirim`              |
+| F-13–F-17 | `petugas` (login), `antrean`, `detail`, `verifikasi`,  |
+|           | `lengkapi`, `tolak`, `teruskan`, `tindakan`, `selesai` |
+| F-18      | `petugas/audit`                                        |
+| F-19      | `petugas/master` (ringkasan; CRUD belum dirinci)       |
+| F-20–F-23 | `transparansi`                                         |
+| F-07–F-08 | Ditunda: identitas terverifikasi dan peta              |
 
 ---
 
 ## Screenshot
 
-| Desktop | Mobile |
-| --- | --- |
-| ![Pratinjau desktop](docs/desktop-preview.png) | ![Pratinjau mobile](docs/mobile-preview.png) |
+Desktop : ![Pratinjau desktop](docs/desktop-preview.png)
+Mobile  : ![Pratinjau mobile](docs/mobile-preview.png)
 
 Screenshot merupakan pratinjau rancangan (mock-up) dari file desain SIAP.
 
