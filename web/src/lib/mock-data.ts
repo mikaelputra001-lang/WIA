@@ -315,4 +315,16 @@ export const TRANSPARANSI: Transparansi = {
   ],
   perKategori: 'Pungutan liar 48 · Penyalahgunaan anggaran 36 · Fasilitas 28 · Lainnya 16',
   tren: 'Juli 72 · Agustus 89 · September 104 · Oktober 128',
+  perKategoriData: [
+    { label: 'Pungutan liar', value: 48 },
+    { label: 'Penyalahgunaan anggaran', value: 36 },
+    { label: 'Penyalahgunaan fasilitas', value: 28 },
+    { label: 'Lainnya', value: 16 },
+  ],
+  trenData: [
+    { label: 'Juli', value: 72 },
+    { label: 'Agustus', value: 89 },
+    { label: 'September', value: 104 },
+    { label: 'Oktober', value: 128 },
+  ],
 }

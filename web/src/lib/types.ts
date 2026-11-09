@@ -75,6 +75,8 @@ export interface Transparansi {
   stats: { value: string; label: string }[]
   perKategori: string
   tren: string
+  perKategoriData: { label: string; value: number }[]
+  trenData: { label: string; value: number }[]
 }
 
 export interface Draft {

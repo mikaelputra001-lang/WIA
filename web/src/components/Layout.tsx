@@ -43,7 +43,15 @@ export function Layout() {
         <Outlet />
       </main>
       <footer className="app">
-        <span>SIAP · Lapor aman, pantau sampai tuntas.</span>
+        <div className="footer-app-info">
+          <strong>SIAP · Sistem Informasi Aduan Publik.</strong>
+          <p>Prototipe lomba. Seluruh data adalah contoh dan tidak menerima laporan sungguhan.</p>
+          <div className="footer-links">
+            <Link to="/panduan">Panduan &amp; privasi</Link>
+            <Link to="/transparansi">Transparansi</Link>
+            <Link to="/cek">Cek status</Link>
+          </div>
+        </div>
         <Link to="/petugas" className="access-footer">
           Akses petugas →
         </Link>

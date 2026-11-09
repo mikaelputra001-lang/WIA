@@ -4,6 +4,7 @@ import { Link, useNavigate, Navigate } from 'react-router'
 import { Page, Card, ActionsRow, Notice } from '../components/Page'
 import { Field } from '../components/Field'
 import { FileChip } from '../components/FileChip'
+import { Skeleton } from '../components/Feedback'
 import { ACCEPT_ATTR } from '../lib/upload'
 import { api } from '../lib/api'
 import type { StoredTicket, EvidenceMeta } from '../lib/types'
@@ -23,7 +24,7 @@ function issueText(issues: UploadIssue[]): string {
 export function Balas() {
   const navigate = useNavigate()
   const [ticket, setTicket] = useState<StoredTicket | null>(null)
-  const [missing, setMissing] = useState(false)
+  const [loadState, setLoadState] = useState<'loading' | 'ok' | 'invalid'>('loading')
   const [body, setBody] = useState('')
   const [files, setFiles] = useState<EvidenceMeta[]>([])
   const [issues, setIssues] = useState<UploadIssue[]>([])
@@ -31,18 +32,34 @@ export function Balas() {
   const [emptyReply, setEmptyReply] = useState(false)
 
   useEffect(() => {
+    let active = true
     void api.getActiveTicket().then((t) => {
+      if (!active) return
       if (!t || t.status !== 'Perlu Dilengkapi') {
-        setMissing(true)
-        setTicket(t)
+        setLoadState('invalid')
         return
       }
       setTicket(t)
+      setLoadState('ok')
     })
+    return () => {
+      active = false
+    }
   }, [])
 
-  if (missing || !ticket || ticket.status !== 'Perlu Dilengkapi') {
+  if (loadState === 'invalid') {
     return <Navigate to="/tiket" replace />
+  }
+  if (loadState === 'loading' || !ticket) {
+    return (
+      <Page
+        eyebrow="TANGGAPI PERMINTAAN ADMIN"
+        title="Menyiapkan formulir balasan."
+        lead="Data tiket sedang dimuat."
+      >
+        <Skeleton lines={4} />
+      </Page>
+    )
   }
 
   const onPick = async (e: ChangeEvent<HTMLInputElement>) => {

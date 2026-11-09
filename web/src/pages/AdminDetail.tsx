@@ -2,23 +2,24 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate, Navigate } from 'react-router'
 import { Page, Card, ActionsRow, Timeline } from '../components/Page'
 import { RequireAdmin } from '../components/RequireAdmin'
+import { StatusBadge } from '../components/StatusBadge'
+import { Skeleton } from '../components/Feedback'
 import { adminApi } from '../lib/api'
 import type { StoredTicket, InternalNote } from '../lib/types'
 import { formatTanggal, formatBytes } from '../lib/format'
 
 export function AdminDetail() {
   const navigate = useNavigate()
+  const [number] = useState(() => adminApi.getAdminTicketNumber())
   const [ticket, setTicket] = useState<StoredTicket | null>(null)
   const [internalNotes, setInternalNotes] = useState<InternalNote[]>([])
   const [missing, setMissing] = useState(false)
 
   useEffect(() => {
-    const number = adminApi.getAdminTicketNumber()
-    if (!number) {
-      setMissing(true)
-      return
-    }
+    if (!number) return
+    let active = true
     void adminApi.detail(number).then((data) => {
+      if (!active) return
       if (!data) {
         setMissing(true)
         return
@@ -26,10 +27,26 @@ export function AdminDetail() {
       setTicket(data.ticket)
       setInternalNotes(data.internalNotes)
     })
-  }, [])
+    return () => {
+      active = false
+    }
+  }, [number])
 
-  if (missing) return <Navigate to="/petugas/antrean" replace />
-  if (!ticket) return null
+  if (!number || missing) return <Navigate to="/petugas/antrean" replace />
+
+  if (!ticket) {
+    return (
+      <RequireAdmin>
+        <Page
+          eyebrow="DETAIL LAPORAN"
+          title="Menyiapkan detail laporan."
+          lead="Data tiket sedang dimuat."
+        >
+          <Skeleton lines={5} />
+        </Page>
+      </RequireAdmin>
+    )
+  }
 
   const allowed = adminApi.allowedTransitions(ticket.status)
 
@@ -38,6 +55,7 @@ export function AdminDetail() {
       <Page
         eyebrow={`DETAIL LAPORAN · ${ticket.status.toUpperCase()}`}
         title={ticket.title}
+        badge={<StatusBadge status={ticket.status} />}
         lead={`${ticket.number} · Anonim · ${formatTanggal(ticket.incidentDate, ticket.incidentDateApprox)}. Tidak ada data identitas yang diminta dalam formulir anonim.`}
       >
         <div className="cards">

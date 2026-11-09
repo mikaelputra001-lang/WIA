@@ -6,6 +6,7 @@
 > - Strategi & alasan (skor juri, target): `rencanaMikael.md`
 > - Dokumen ini: **urutan kerja operasional yang tidak ambigu**
 > - Aturan main: kerjakan **berurutan per fase**, satu task = satu commit, dan **setiap task wajib lulus verifikasi** sebelum lanjut.
+> - **Legenda status:** ✅ = sudah dikerjakan · ⬜ = belum dikerjakan
 
 ---
 
@@ -174,12 +175,14 @@ Draft laporan (`loadDraft`, `addDraftFiles`, `saveDraftFields`, `clearDraft`) **
 
 > Format tiap task: **Tujuan → File → Langkah → Selesai bila → Verifikasi**.
 > Kerjakan Fase 0 dulu (cepat, langsung menaikkan skor juri), baru Fase 1–3.
+>
+> **Status per 9 November 2026:** ✅ **Fase 0 SELESAI (10/10 task)** · ⬜ Fase 1–3 belum dimulai.
 
 ---
 
 ### FASE 0 — Polesan Submission (naikkan 4 aspek dari 4 → 5)
 
-#### [T0.1] Tulis ulang README.md
+#### ✅ [T0.1] Tulis ulang README.md
 - **Tujuan:** skor "Kelengkapan Repository & README.md" dari 4 → 5.
 - **File:** `web/README.md` (sekarang masih template bawaan Vite — wajib diganti total).
 - **Langkah:**
@@ -195,7 +198,7 @@ Draft laporan (`loadDraft`, `addDraftFiles`, `saveDraftFields`, `clearDraft`) **
 - **Selesai bila:** tidak ada lagi teks template Vite ("This template provides...", "React Compiler", "Oxlint configuration"); semua bagian di atas ada.
 - **Verifikasi:** baca ulang README; pastikan perintah di README benar-benar jalan.
 
-#### [T0.2] Sitemap + keterlacakan PRD di README
+#### ✅ [T0.2] Sitemap + keterlacakan PRD di README
 - **Tujuan:** skor "Kejelasan Struktur (Sitemap) & Wireframe" dari 4 → 5.
 - **File:** `web/README.md` (bagian baru).
 - **Langkah:**
@@ -205,14 +208,14 @@ Draft laporan (`loadDraft`, `addDraftFiles`, `saveDraftFields`, `clearDraft`) **
 - **Selesai bila:** diagram render di GitHub (cek sintaks Mermaid) dan semua rute di `App.tsx` tercakup.
 - **Verifikasi:** hitung rute di diagram = 22 halaman (catch-all `*` tidak perlu dimasukkan).
 
-#### [T0.3] Screenshot di repository
+#### ✅ [T0.3] Screenshot di repository
 - **Tujuan:** bukti visual untuk juri; syarat FDS (landing + 1 halaman lain) sudah aman, ini menambah kualitas.
 - **File:** buat `web/docs/`; salin `WIA/SIAP Design/desktop-preview.png` dan `mobile-preview.png` ke `web/docs/` (supaya repo `web/` mandiri).
 - **Langkah:** embed keduanya di README dengan caption. Opsional: screenshot halaman Transparansi & antrean admin setelah Fase 0 selesai.
 - **Selesai bila:** gambar tampil di README dengan path relatif yang benar.
 - **Verifikasi:** preview markdown; pastikan tidak ada path absolut.
 
-#### [T0.4] Grafik di halaman Transparansi
+#### ✅ [T0.4] Grafik di halaman Transparansi
 - **Tujuan:** skor "Desain Visual" & "Potensi Dampak" — data publik harus mudah dibaca.
 - **File:** `src/lib/types.ts` (`Transparansi`), `src/lib/mock-data.ts` (`TRANSPARANSI`), `src/pages/Transparansi.tsx`, `src/styles.css`.
 - **Langkah:**
@@ -223,14 +226,14 @@ Draft laporan (`loadDraft`, `addDraftFiles`, `saveDraftFields`, `clearDraft`) **
 - **Selesai bila:** grafik tampil benar di desktop & 390px; angka sesuai seed; `npm run build` sukses.
 - **Verifikasi:** bandingkan angka dengan `mock-data.ts`; zoom 200% tetap terbaca.
 
-#### [T0.5] Komponen badge status yang konsisten
+#### ✅ [T0.5] Komponen badge status yang konsisten
 - **Tujuan:** konsistensi visual (status memakai teks + warna pendukung, sesuai design brief).
 - **File:** baru `src/components/StatusBadge.tsx`; pakai di `AdminQueue.tsx`, `AdminDetail.tsx`, `Tiket.tsx`, dan halaman admin lain yang menampilkan status; tambah class di `src/styles.css`.
 - **Langkah:** buat satu pemetaan tetap status → class warna (7 status). Jangan mengubah teks status. Gunakan `aria-label` yang jelas.
 - **Selesai bila:** semua tampilan status memakai komponen ini; tidak ada warna status hardcoded tersisa di halaman.
 - **Verifikasi:** grep nama status di `src/pages/` — tidak ada span/div status ad-hoc.
 
-#### [T0.6] Empty state & loading state
+#### ✅ [T0.6] Empty state & loading state
 - **Tujuan:** skor fungsionalitas — UI tidak "kosong membingungkan" saat data belum ada/loading.
 - **File:** `AdminQueue.tsx`, `AdminAudit.tsx`, `AdminDetail.tsx`, `Tiket.tsx` (dan halaman lain yang `return null` saat loading).
 - **Langkah:**
@@ -240,35 +243,35 @@ Draft laporan (`loadDraft`, `addDraftFiles`, `saveDraftFields`, `clearDraft`) **
 - **Selesai bila:** tidak ada halaman yang menampilkan layar kosong tanpa penjelasan.
 - **Verifikasi:** uji dengan filter antrean yang tidak punya hasil; uji refresh langsung di `/petugas/detail`.
 
-#### [T0.7] Poles landing & footer
+#### ✅ [T0.7] Poles landing & footer
 - **Tujuan:** skor "Desain Visual & Layout".
 - **File:** `src/pages/Home.tsx`, `src/components/Layout.tsx`, `src/styles.css`.
 - **Langkah:** perbaiki hierarki hero (judul, subjudul, CTA utama jelas), tambah ringkasan "cara kerja" 3 langkah bila belum ada, footer memuat: disclaimer data contoh, link Panduan, link Transparansi, teks "Prototipe lomba". Jangan mengubah alur navigasi.
 - **Selesai bila:** landing terbaca baik di 390px & 1440px; tidak ada overflow horizontal.
 - **Verifikasi:** uji manual kedua viewport.
 
-#### [T0.8] Perbaiki lint warning
+#### ✅ [T0.8] Perbaiki lint warning
 - **Tujuan:** `oxlint` bersih (0 warning).
 - **File:** `src/pages/AdminDetail.tsx` (warning `react(set-state-in-effect)` di sekitar baris 18).
 - **Langkah:** hilangkan `setState` sinkron di dalam `useEffect`. Pola yang disarankan: baca nomor tiket saat render; jika tidak ada, langsung `<Navigate to="/petugas/antrean" replace />`; state hanya diisi di callback async. Alternatif: `useState` inisialisasi + efek hanya untuk fetch.
 - **Selesai bila:** `npm run lint` → 0 warning, `npm run build` sukses, perilaku redirect sama.
 - **Verifikasi:** buka `/petugas/detail` tanpa memilih tiket → redirect ke antrean; dengan tiket → detail tampil.
 
-#### [T0.9] Audit responsivitas 390px
+#### ✅ [T0.9] Audit responsivitas 390px
 - **Tujuan:** skor "Fungsionalitas, Navigasi & Responsivitas".
 - **File:** semua halaman di `src/pages/`, terutama yang punya tabel/form lebar (`AdminQueue`, `AdminDetail`, `AdminAudit`, `AdminMaster`, `Lapor`, `Tiket`), plus `src/styles.css`.
 - **Langkah:** buka semua 22 rute di viewport 390×844. Perbaiki overflow horizontal (tabel → wrapper `overflow-x:auto`; grid → 1 kolom; tombol → full width bila perlu). Jangan mengubah desain desktop.
 - **Selesai bila:** `document.documentElement.scrollWidth <= 390` di semua rute; navigasi & form bisa dipakai dengan jari.
 - **Verifikasi:** DevTools responsive mode, cek tiap rute; catat hasil di commit message.
 
-#### [T0.10] Validasi form inline di alur Lapor
+#### ✅ [T0.10] Validasi form inline di alur Lapor
 - **Tujuan:** fungsionalitas & UX.
 - **File:** `src/pages/Lapor.tsx`, `src/pages/Bukti.tsx`, `src/components/Field.tsx`.
 - **Langkah:** tampilkan error di bawah field yang gagal (judul, kategori, kronologi, tanggal, lokasi, pihak terkait), dengan `aria-describedby`. Jangan mengubah aturan wajib yang ada.
 - **Selesai bila:** submit kosong menampilkan error per field, bukan hanya pesan umum; pengguna bisa lanjut setelah diperbaiki.
 - **Verifikasi:** uji submit kosong, submit sebagian, submit valid; keyboard-only.
 
-**Definisi selesai Fase 0:** `npm run lint` 0 warning, `npm run build` sukses, README lengkap + sitemap + screenshot, semua rute aman di 390px.
+**Definisi selesai Fase 0:** ✅ **TERPENUHI** — `npm run lint` 0 warning, `npm run build` sukses, README lengkap + sitemap + screenshot, semua rute aman di 390px.
 
 ---
 
@@ -463,3 +466,42 @@ Catatan: semua data adalah **contoh/simulasi**, bukan laporan nyata. Jangan mena
 - [ ] Fase 1–3 sesuai prioritas yang disepakati; progress dicatat di README
 - [ ] Screenshot baru landing + 1 halaman unggulan diperbarui
 - [ ] Tidak ada file rahasia (`.env`, DB, upload) ikut ter-commit
+
+---
+
+## 11. Log Implementasi
+
+### ✅ Fase 0 — 9 November 2026 (branch `mikaelPunyaBranch`)
+
+**File yang diubah/ditambah:**
+
+| File | Perubahan |
+| --- | --- |
+| `web/README.md` | Ditulis ulang total: deskripsi, fitur, tech stack, cara run, kredensial demo, sitemap Mermaid, alur status, keterlacakan PRD, screenshot, progress, batasan |
+| `web/docs/desktop-preview.png`, `mobile-preview.png` | Screenshot pratinjau disalin dari artefak desain |
+| `web/src/styles.css` | Badge status, skeleton shimmer, empty state, field error, chart bar/sparkline, steps landing, footer, navigasi mobile |
+| `web/src/components/StatusBadge.tsx` | **Baru** — badge status konsisten untuk 7 status |
+| `web/src/components/Feedback.tsx` | **Baru** — `Skeleton` dan `EmptyState` |
+| `web/src/components/Page.tsx` | `Page` menerima `badge`; `Card` menerima judul berupa elemen |
+| `web/src/components/Field.tsx` | Dukungan `error` inline + `role="alert"` |
+| `web/src/components/Layout.tsx` | Footer baru: disclaimer + tautan panduan/transparansi/cek status |
+| `web/src/pages/Home.tsx` | Bagian "cara kerja" 3 langkah |
+| `web/src/pages/Lapor.tsx` | Validasi inline per field + skeleton |
+| `web/src/pages/Bukti.tsx`, `Tinjau.tsx` | Skeleton menggantikan layar kosong |
+| `web/src/pages/Transparansi.tsx` | Bar chart per kategori + sparkline tren (SVG native) |
+| `web/src/pages/Tiket.tsx` | Badge status + skeleton |
+| `web/src/pages/Balas.tsx` | Perbaikan bug: halaman tidak lagi redirect sebelum data selesai dimuat; skeleton |
+| `web/src/pages/AdminQueue.tsx` | Badge status, skeleton, empty state |
+| `web/src/pages/AdminDetail.tsx` | Perbaikan lint `set-state-in-effect`, skeleton, badge status |
+| `web/src/pages/AdminAudit.tsx` | Skeleton + empty state |
+| `web/src/lib/types.ts`, `mock-data.ts` | Data terstruktur `perKategoriData` & `trenData` untuk grafik |
+
+**Hasil verifikasi:**
+- ✅ `npm run lint` — **0 warning**
+- ✅ `npm run build` — sukses (tsc + vite)
+- ✅ 22 rute diuji pada viewport **390×844** — `scrollWidth = 390` di semua rute (0 overflow horizontal)
+- ✅ Smoke test render: beranda, lapor, transparansi, cek, petugas — konten tampil, tanpa error
+- ✅ Alur admin: login verifikator → antrean (6 kartu, 6 badge) → detail (badge `Perlu Dilengkapi`) → login super admin → audit (4 entri)
+- ✅ Validasi inline Lapor: submit kosong menampilkan **6 pesan error** per field
+
+**Catatan untuk AI berikutnya:** Fase 0 tidak mengubah arsitektur data. `api.ts` masih memakai `mock-db.ts` + `sessionStorage`; pekerjaan backend dimulai di Fase 1 sesuai urutan di atas.

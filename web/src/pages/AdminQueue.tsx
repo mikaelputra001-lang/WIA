@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Page, Card, ActionsRow, StatGrid } from '../components/Page'
 import { RequireAdmin } from '../components/RequireAdmin'
+import { StatusBadge } from '../components/StatusBadge'
+import { EmptyState, Skeleton } from '../components/Feedback'
 import { adminApi } from '../lib/api'
 import type { StoredTicket, Status } from '../lib/types'
 import { formatTanggal } from '../lib/format'
@@ -27,7 +29,19 @@ export function AdminQueue() {
       })
   }, [statusFilter, categoryFilter, search])
 
-  if (loading) return null
+  if (loading) {
+    return (
+      <RequireAdmin>
+        <Page
+          eyebrow="PANEL VERIFIKATOR · DATA CONTOH"
+          title="Memuat antrean laporan."
+          lead="Menyiapkan daftar tiket."
+        >
+          <Skeleton lines={6} />
+        </Page>
+      </RequireAdmin>
+    )
+  }
 
   const menunggu = tickets.filter((t) => t.status === 'Diterima' || t.status === 'Perlu Dilengkapi').length
   const sedang = tickets.filter(
@@ -94,12 +108,20 @@ export function AdminQueue() {
 
         <div className="cards">
           {tickets.length === 0 ? (
-            <Card title="Tidak ada laporan">
-              <p>Tidak ada laporan yang cocok dengan filter saat ini.</p>
-            </Card>
+            <EmptyState title="Tidak ada laporan">
+              Tidak ada laporan yang cocok dengan filter saat ini.
+            </EmptyState>
           ) : (
             tickets.map((t) => (
-              <Card key={t.number} title={`${t.number} · ${t.status}`}>
+              <Card
+                key={t.number}
+                title={
+                  <span className="card-title-row">
+                    {t.number}
+                    <StatusBadge status={t.status} />
+                  </span>
+                }
+              >
                 <p>
                   {t.title} · {formatTanggal(t.incidentDate, t.incidentDateApprox)}
                 </p>

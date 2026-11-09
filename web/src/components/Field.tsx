@@ -5,10 +5,11 @@ interface FieldProps {
   label: string
   required?: boolean
   hint?: string
+  error?: string
   children: ReactNode
 }
 
-export function Field({ id, label, required, hint, children }: FieldProps) {
+export function Field({ id, label, required, hint, error, children }: FieldProps) {
   return (
     <div className="field">
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -17,6 +18,11 @@ export function Field({ id, label, required, hint, children }: FieldProps) {
         {required ? <span aria-hidden="true"> *</span> : <span aria-hidden="true"> (opsional)</span>}
       </label>
       {children}
+      {error ? (
+        <p className="field-error" id={`${id}-error`} role="alert">
+          {error}
+        </p>
+      ) : null}
       {hint ? <p className="hint">{hint}</p> : null}
     </div>
   )

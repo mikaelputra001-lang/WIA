@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, Navigate } from 'react-router'
 import { Page, Card, ActionsRow, Timeline } from '../components/Page'
+import { StatusBadge } from '../components/StatusBadge'
+import { Skeleton } from '../components/Feedback'
 import { api } from '../lib/api'
 import type { StoredTicket, Status } from '../lib/types'
 import { formatTanggal, formatBytes } from '../lib/format'
@@ -72,7 +74,17 @@ export function Tiket() {
   if (missing) {
     return <Navigate to="/cek" replace />
   }
-  if (!ticket) return null
+  if (!ticket) {
+    return (
+      <Page
+        eyebrow="TIKET PRIBADI"
+        title="Menyiapkan tiket Anda."
+        lead="Data tiket sedang dimuat."
+      >
+        <Skeleton lines={5} />
+      </Page>
+    )
+  }
 
   const view = statusView(ticket.status)
   const exitTicket = (to: string) => {
@@ -81,7 +93,12 @@ export function Tiket() {
   }
 
   return (
-    <Page eyebrow={`TIKET ${ticket.number}`} title={view.title} lead={view.lead}>
+    <Page
+      eyebrow={`TIKET ${ticket.number}`}
+      title={view.title}
+      badge={<StatusBadge status={ticket.status} />}
+      lead={view.lead}
+    >
       <div className="cards">
         <Card title="Laporan Anda">
           <p>

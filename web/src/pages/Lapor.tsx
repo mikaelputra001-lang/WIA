@@ -3,6 +3,7 @@ import type { FormEventHandler, FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { Page, ActionsRow, Notice } from '../components/Page'
 import { Field } from '../components/Field'
+import { Skeleton } from '../components/Feedback'
 import type { ReportFields } from '../lib/types'
 import { api } from '../lib/api'
 
@@ -14,6 +15,15 @@ const EMPTY: ReportFields = {
   incidentDateApprox: false,
   location: '',
   involvedParty: '',
+}
+
+const ERROR_MESSAGE: Record<string, string> = {
+  category: 'Pilih kategori laporan.',
+  title: 'Judul laporan wajib diisi.',
+  chronology: 'Kronologi wajib diisi.',
+  incidentDate: 'Tanggal kejadian wajib diisi.',
+  location: 'Lokasi kejadian wajib diisi.',
+  involvedParty: 'Pihak terkait wajib diisi.',
 }
 
 export function Lapor() {
@@ -29,11 +39,12 @@ export function Lapor() {
     })
   }, [])
 
-  if (!loaded) return null
-
   const set = <K extends keyof ReportFields>(key: K, value: ReportFields[K]) => {
     setFields((f) => ({ ...f, [key]: value }))
+    setInvalid((list) => list.filter((k) => k !== key))
   }
+
+  const errorFor = (key: string) => (invalid.includes(key) ? ERROR_MESSAGE[key] : undefined)
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -48,6 +59,18 @@ export function Lapor() {
     navigate('/bukti')
   }
 
+  if (!loaded) {
+    return (
+      <Page
+        eyebrow="BUAT LAPORAN · LANGKAH 1 DARI 3"
+        title="Menyiapkan formulir laporan."
+        lead="Memuat draf yang tersimpan."
+      >
+        <Skeleton lines={6} />
+      </Page>
+    )
+  }
+
   return (
     <Page
       eyebrow="BUAT LAPORAN · LANGKAH 1 DARI 3"
@@ -55,13 +78,14 @@ export function Lapor() {
       lead="Mode anonim aktif. Gunakan fakta yang Anda ketahui dan hindari menuliskan identitas diri."
     >
       <form onSubmit={onSubmit} noValidate>
-        <Field id="kategori" label="Kategori" required>
+        <Field id="kategori" label="Kategori" required error={errorFor('category')}>
           <select
             id="kategori"
             className="input"
             value={fields.category}
             onChange={(e) => set('category', e.target.value)}
             aria-invalid={invalid.includes('category') ? 'true' : undefined}
+            aria-describedby={invalid.includes('category') ? 'kategori-error' : undefined}
           >
             <option value="" disabled>
               Pilih kategori…
@@ -74,7 +98,7 @@ export function Lapor() {
           </select>
         </Field>
 
-        <Field id="judul" label="Judul laporan" required>
+        <Field id="judul" label="Judul laporan" required error={errorFor('title')}>
           <input
             id="judul"
             className="input"
@@ -82,10 +106,11 @@ export function Lapor() {
             onChange={(e) => set('title', e.target.value)}
             placeholder="Ringkas dugaan yang terjadi"
             aria-invalid={invalid.includes('title') ? 'true' : undefined}
+            aria-describedby={invalid.includes('title') ? 'judul-error' : undefined}
           />
         </Field>
 
-        <Field id="kronologi" label="Kronologi" required>
+        <Field id="kronologi" label="Kronologi" required error={errorFor('chronology')}>
           <textarea
             id="kronologi"
             className="input"
@@ -93,6 +118,7 @@ export function Lapor() {
             onChange={(e) => set('chronology', e.target.value)}
             placeholder="Tuliskan urutan kejadian sejelas mungkin. Hindari nama, kontak, atau identitas pribadi."
             aria-invalid={invalid.includes('chronology') ? 'true' : undefined}
+            aria-describedby={invalid.includes('chronology') ? 'kronologi-error' : undefined}
           />
         </Field>
 
@@ -101,6 +127,7 @@ export function Lapor() {
           label="Tanggal kejadian"
           required
           hint="Gunakan tanggal perkiraan bila tanggal pasti tidak diketahui."
+          error={errorFor('incidentDate')}
         >
           <input
             id="tanggal"
@@ -109,6 +136,7 @@ export function Lapor() {
             value={fields.incidentDate}
             onChange={(e) => set('incidentDate', e.target.value)}
             aria-invalid={invalid.includes('incidentDate') ? 'true' : undefined}
+            aria-describedby={invalid.includes('incidentDate') ? 'tanggal-error' : undefined}
           />
           <div className="check" style={{ marginTop: 8 }}>
             <input
@@ -124,7 +152,7 @@ export function Lapor() {
           </div>
         </Field>
 
-        <Field id="lokasi" label="Lokasi kejadian" required>
+        <Field id="lokasi" label="Lokasi kejadian" required error={errorFor('location')}>
           <input
             id="lokasi"
             className="input"
@@ -132,10 +160,11 @@ export function Lapor() {
             onChange={(e) => set('location', e.target.value)}
             placeholder="Contoh: Loket layanan A — wilayah simulasi"
             aria-invalid={invalid.includes('location') ? 'true' : undefined}
+            aria-describedby={invalid.includes('location') ? 'lokasi-error' : undefined}
           />
         </Field>
 
-        <Field id="pihak" label="Pihak terkait" required>
+        <Field id="pihak" label="Pihak terkait" required error={errorFor('involvedParty')}>
           <input
             id="pihak"
             className="input"
@@ -143,6 +172,7 @@ export function Lapor() {
             onChange={(e) => set('involvedParty', e.target.value)}
             placeholder="Contoh: Petugas loket (nama tidak diketahui)"
             aria-invalid={invalid.includes('involvedParty') ? 'true' : undefined}
+            aria-describedby={invalid.includes('involvedParty') ? 'pihak-error' : undefined}
           />
         </Field>
 

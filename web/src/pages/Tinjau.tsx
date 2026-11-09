@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { Page, Card, ActionsRow, Notice } from '../components/Page'
 import { CheckField } from '../components/Field'
+import { Skeleton } from '../components/Feedback'
 import { api } from '../lib/api'
 import type { EvidenceMeta, ReportFields } from '../lib/types'
 import { formatTanggal } from '../lib/format'
@@ -42,7 +43,17 @@ export function Tinjau() {
     )
   }
 
-  if (!fields) return null
+  if (!fields) {
+    return (
+      <Page
+        eyebrow="BUAT LAPORAN · LANGKAH 3 DARI 3"
+        title="Menyiapkan tinjauan laporan."
+        lead="Memuat draf laporan."
+      >
+        <Skeleton lines={5} />
+      </Page>
+    )
+  }
 
   const submit = async () => {
     if (!agree || !captcha || sending) return

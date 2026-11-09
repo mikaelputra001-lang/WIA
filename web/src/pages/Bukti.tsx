@@ -3,6 +3,7 @@ import type { ChangeEvent } from 'react'
 import { useNavigate } from 'react-router'
 import { Page, Card, ActionsRow, Notice } from '../components/Page'
 import { FileChip } from '../components/FileChip'
+import { Skeleton } from '../components/Feedback'
 import { ACCEPT_ATTR } from '../lib/upload'
 import { api } from '../lib/api'
 import type { UploadIssue } from '../lib/mock-db'
@@ -46,7 +47,17 @@ export function Bukti() {
     setIssues(result.issues)
   }
 
-  if (!ready) return null
+  if (!ready) {
+    return (
+      <Page
+        eyebrow="BUAT LAPORAN · LANGKAH 2 DARI 3"
+        title="Menyiapkan unggahan bukti."
+        lead="Memuat draf laporan."
+      >
+        <Skeleton lines={4} />
+      </Page>
+    )
+  }
 
   return (
     <Page

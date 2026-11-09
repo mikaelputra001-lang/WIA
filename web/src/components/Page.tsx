@@ -7,17 +7,25 @@ interface PageProps {
   title: string
   lead?: string
   home?: boolean
+  badge?: ReactNode
   children: ReactNode
 }
 
-export function Page({ eyebrow, title, lead, home, children }: PageProps) {
+export function Page({ eyebrow, title, lead, home, badge, children }: PageProps) {
   const crumb = `SIAP / ${eyebrow.toLowerCase()}`
   const body = children
   return (
     <div className={`container${home ? ' home' : ''}`}>
       <div className="crumb">{crumb}</div>
       <div className="eyebrow">{eyebrow}</div>
-      <h1>{title}</h1>
+      {badge ? (
+        <div className="title-row">
+          <h1>{title}</h1>
+          {badge}
+        </div>
+      ) : (
+        <h1>{title}</h1>
+      )}
       {lead ? <p className="lead">{lead}</p> : null}
       {home ? (
         body
@@ -31,7 +39,7 @@ export function Page({ eyebrow, title, lead, home, children }: PageProps) {
   )
 }
 
-export function Card({ title, children }: { title: string; children: ReactNode }) {
+export function Card({ title, children }: { title: ReactNode; children: ReactNode }) {
   return (
     <article className="card">
       <h2>{title}</h2>
